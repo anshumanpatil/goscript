@@ -1,9 +1,25 @@
 package goscript
 
-func IsPalindrome(str string) (ok bool, result string) {
-	strArr := []rune(str)
+import "fmt"
+
+type JSString string
+
+func ColorPrint(str []interface{}) {
+	printMatter := ""
+	for i, v := range str {
+		if i == 0 {
+			printMatter += fmt.Sprintf(fmt.Sprintf((" \033[1;32m%s\033[0m "), fmt.Sprintf("%v", v)))
+		} else {
+			printMatter += fmt.Sprintf(fmt.Sprintf((" \033[1;35m%s\033[0m "), fmt.Sprintf("%v", v)))
+		}
+	}
+	fmt.Println(printMatter)
+}
+
+func (str JSString) IsPalindrome() (ok bool, result JSString) {
+	strArr := []rune(string(str))
 	for i := len(strArr) - 1; i >= 0; i-- {
-		result += string(strArr[i])
+		result += JSString(strArr[i])
 	}
 	return str == result, result
 }
@@ -16,18 +32,12 @@ func StringReverse(str string) (result string) {
 	return
 }
 
-func StringContainsChar(str string, strToCompare string) (result int) {
-	strArr := []rune(str)
-	for i := len(strArr) - 1; i >= 0; i-- {
-		if string(strArr[i]) == strToCompare {
-			result++
-		}
+func (str JSString) StringIndexOf(strToCompare string) (result int) {
+	if len(strToCompare) > 1 {
+		ColorPrint([]any{"[StringIndexOf] Only works for single character!!!"})
+		return -1
 	}
-	return
-}
-
-func StringIndexOf(str string, strToCompare string) (result int) {
-	strArr := []rune(str)
+	strArr := []rune(string(str))
 	for i := 0; i <= len(strArr)-1; i++ {
 		if string(strArr[i]) == strToCompare {
 			return i
@@ -39,8 +49,12 @@ func StringIndexOf(str string, strToCompare string) (result int) {
 	return
 }
 
-func StringLastIndexOf(str string, strToCompare string) (result int) {
-	strArr := []rune(str)
+func (str JSString) StringLastIndexOf(strToCompare string) (result int) {
+	if len(strToCompare) > 1 {
+		ColorPrint([]any{"[StringIndexOf] Only works for single character!!!"})
+		return -1
+	}
+	strArr := []rune(string(str))
 	for i := len(strArr) - 1; i >= 0; i-- {
 		if string(strArr[i]) == strToCompare {
 			return i
@@ -52,13 +66,8 @@ func StringLastIndexOf(str string, strToCompare string) (result int) {
 	return
 }
 
-func StringLength(str string) (length int) {
-	length = len([]rune(str))
-	return
-}
-
-func StringToMap(str string) map[int]string {
-	strArr := []rune(str)
+func (str JSString) StringToMap() map[int]string {
+	strArr := []rune(string(str))
 	var result map[int]string = map[int]string{}
 	for i := 0; i <= len(strArr)-1; i++ {
 		result[i] = string(strArr[i])
@@ -67,8 +76,8 @@ func StringToMap(str string) map[int]string {
 	return result
 }
 
-func StringToSlice(str string) []string {
-	strArr := []rune(str)
+func (str JSString) StringToSlice() []string {
+	strArr := []rune(string(str))
 	result := []string{}
 	for i := 0; i <= len(strArr)-1; i++ {
 		result = append(result, string(strArr[i]))
@@ -77,8 +86,8 @@ func StringToSlice(str string) []string {
 	return result
 }
 
-func StringRemoveFirstChar(str string) string {
-	strArr := []rune(str)
+func (str JSString) StringRemoveFirstChar() string {
+	strArr := []rune(string(str))
 	result := ""
 	for i := 1; i <= len(strArr)-1; i++ {
 		result += string(strArr[i])
@@ -87,8 +96,8 @@ func StringRemoveFirstChar(str string) string {
 	return result
 }
 
-func StringRemoveLastChar(str string) string {
-	strArr := []rune(str)
+func (str JSString) StringRemoveLastChar() string {
+	strArr := []rune(string(str))
 	result := ""
 	for i := 0; i <= len(strArr)-1; i++ {
 		if i != len(strArr)-1 {
@@ -97,20 +106,6 @@ func StringRemoveLastChar(str string) string {
 	}
 
 	return result
-}
-
-func StringCharInstances(str string, occurer string) (result int) {
-	if StringLength(occurer) > 1 {
-		return 0
-	}
-	strArr := []rune(str)
-	for i := 0; i <= len(strArr)-1; i++ {
-		if string(strArr[i]) == occurer {
-			result += 1
-		}
-	}
-
-	return
 }
 
 func IntSliceHas(s []int, index int) (result bool) {
@@ -122,10 +117,10 @@ func IntSliceHas(s []int, index int) (result bool) {
 	return
 }
 
-func StringRemove(str string, occurer string) (result string) {
+func (str JSString) StringRemove(occurer JSString) (result JSString) {
 	myresult := []int{}
-	strarr := StringToSlice(str)
-	occurerresult := StringToSlice(occurer)
+	strarr := str.StringToSlice()
+	occurerresult := occurer.StringToSlice()
 	for i, v := range strarr {
 		for _, vx := range occurerresult {
 			if v == vx {
@@ -135,59 +130,86 @@ func StringRemove(str string, occurer string) (result string) {
 	}
 	for i, v := range strarr {
 		if !IntSliceHas(myresult, i) {
-			result += v
+			result += JSString(v)
 		}
 
 	}
 	return
 }
 
-func StringContains(str string, occurer string) (result int) {
-	strArr := []rune(str)
+func (str JSString) StringContains(occurer string) (result int) {
+	strArr := []rune(string(str))
 	myresult := []string{}
-	p := ""
+	var p JSString = ""
 	for i := 0; i <= len(strArr)-1; i++ {
-		p += string(strArr[i])
-		if StringLength(p) > StringLength((occurer)) {
-			p = StringRemoveFirstChar(p)
+		p += JSString(strArr[i])
+		if len(p) > len((occurer)) {
+			p.StringRemoveFirstChar()
 		}
-		if StringLength(p) == StringLength((occurer)) && p == occurer {
-			myresult = append(myresult, p)
+		if len(p) == len((occurer)) && string(p) == occurer {
+			myresult = append(myresult, string(p))
 			result++
 		}
 	}
 	return
 }
 
-func StringSplit(str string, occurer string) (myresult []string) {
-	strArr := []rune(str)
-	// myresult := []string{}
-	p := ""
-	t := ""
-	for i := 0; i <= len(strArr)-1; i++ {
-		p += string(strArr[i])
-		t += string(strArr[i])
-		if StringLength(p) > StringLength((occurer)) {
-			p = StringRemoveFirstChar(p)
-		}
-		if StringLength(p) == StringLength((occurer)) && p == occurer {
-			myresult = append(myresult, StringRemove(t, occurer))
-			t = ""
-			// result++
-		}
-	}
-	myresult = append(myresult, StringRemove(t, occurer))
-	return
-}
+// func (str JSString) StringSplit(occurer JSString) (myresult []JSString) {
+// 	strCopy := str
+// 	isAvailableAt := -1
+// 	freshValues := []string{}
+// 	resultStart := ""
+// 	resultEnd := ""
+// 	result := ""
+// 	for {
+// 		myresult = str.StringChunks(len(occurer))
+// 		for i, v := range myresult {
+// 			if v == occurer {
+// 				isAvailableAt = i
 
-func StringSplitWithChar(str string, splitter string) []string {
+// 				break
+// 			}
+// 		}
+// 		if isAvailableAt >= 0 || len(str) == 0 {
+// 			break
+// 		}
+// 		freshValues = append(freshValues, (str.StringToSlice())[0])
+// 		str = JSString(str.StringRemoveFirstChar())
+// 	}
+// 	if isAvailableAt == -1 { // occurer not available in string
+// 		fmt.Println("isAvailableAt", isAvailableAt, str)
+// 		myresult = []JSString{strCopy}
+// 		return myresult
+// 	}
+// 	for _, v := range myresult[0:isAvailableAt] {
+// 		resultStart += string(v)
+// 	}
+// 	for _, v := range myresult[isAvailableAt+len(occurer):] {
+// 		resultEnd += string(v)
+// 	}
+// 	for _, v := range freshValues {
+// 		result += string(v)
+// 	}
+// 	myresult = []JSString{}
+// 	myresult = append(myresult, JSString(string(result)+string(resultStart)), JSString(resultEnd))
+// 	fmt.Println(" result : ", result)
+// 	fmt.Println(" resultStart : ", resultStart)
+// 	fmt.Println(" resultEnd : ", resultEnd)
+// 	fmt.Println(" freshValues : ", freshValues)
+// 	fmt.Println(" isAvailableAt : ", isAvailableAt)
+// 	fmt.Println(" strCopy : ", strCopy)
+// 	fmt.Println(" occurer : ", occurer)
+// 	return
+// }
+
+func (str JSString) StringSplitWithChar(splitter JSString) []string {
 	// str += splitter
-	strArr := []rune(str)
+	strArr := []rune(string(str))
 	myresult := []string{}
 	p := ""
 	for i := 0; i <= len(strArr)-1; i++ {
 		// fmt.Println("index - ", i, " string - ", string(strArr[i]), " p -- ", p, " comparison ", string(strArr[i]) == splitter)
-		if string(strArr[i]) == splitter {
+		if JSString(strArr[i]) == splitter {
 			myresult = append(myresult, p)
 			p = ""
 		} else {
@@ -199,8 +221,8 @@ func StringSplitWithChar(str string, splitter string) []string {
 	return myresult
 }
 
-func StringChunks(str string, splitter int) []string {
-	strArr := []rune(str)
+func (str JSString) StringChunks(splitter int) []JSString {
+	strArr := []rune(string(str))
 
 	parts := len(strArr) % splitter
 
@@ -209,19 +231,19 @@ func StringChunks(str string, splitter int) []string {
 	} else {
 		parts = (len(strArr) - parts) / splitter
 	}
-	myresult := []string{}
+	myresult := []JSString{}
 
 	p := ""
 	for i := 0; i <= len(strArr)-1; i++ {
 		// fmt.Println("index - ", i, " string - ", string(strArr[i]), " p -- ", p)
 		p += string(strArr[i])
-		if StringLength(p) == splitter {
-			myresult = append(myresult, p)
+		if len(p) == splitter {
+			myresult = append(myresult, JSString(p))
 			p = ""
 		}
 
 	}
-	myresult = append(myresult, p)
+	myresult = append(myresult, JSString(p))
 
 	return myresult
 }

@@ -7,21 +7,55 @@ import (
 )
 
 func main() {
-	str := "anshuman"
-	is, res := goscript.IsPalindrome(str)
+	var str goscript.JSString
+	str = "anshuman"
+	is, res := str.IsPalindrome()
 	fmt.Println("IsPalindrome -- ", is, res)
-	fmt.Println("StringContainsChar -- ", goscript.StringContainsChar(str, "a"))
-	fmt.Println("StringRemove -- ", goscript.StringRemove(str, "hu"))
-	fmt.Println("StringContains -- ", goscript.StringContains(str, "hu"))
-	fmt.Println("StringIndexOf -- ", goscript.StringIndexOf(str, "a"))
-	fmt.Println("StringLastIndexOf -- ", goscript.StringLastIndexOf(str, "a"))
-	fmt.Println("StringLength -- ", goscript.StringLength(str))
-	fmt.Println("StringToMap -- ", goscript.StringToMap(str))
-	fmt.Println("StringToSlice -- ", goscript.StringToSlice(str))
-	fmt.Println("StringSplitWithChar -- ", goscript.StringSplitWithChar(str, "a"))
-	fmt.Println("StringChunks -- ", goscript.StringChunks(str, 3))
-	fmt.Println("StringInstances -- ", goscript.StringCharInstances(str, "a"))
-	fmt.Println("StringRemoveFirstChar -- ", goscript.StringRemoveFirstChar(str))
-	fmt.Println("StringRemoveLastChar -- ", goscript.StringRemoveLastChar(str))
-	fmt.Println("StringSplit -- ", goscript.StringSplit(str, "shum"))
+	goscript.ColorPrint([]any{"IsPalindrome -- ", is, res})
+	goscript.ColorPrint([]any{
+		"StringRemove -- ",
+		str.StringRemove("hu"),
+	})
+	goscript.ColorPrint([]any{
+		"StringContains -- ",
+		str.StringContains("ans"),
+	})
+	goscript.ColorPrint([]any{
+		"StringIndexOf -- ",
+		str.StringIndexOf("n"),
+	})
+	goscript.ColorPrint([]any{
+		"StringLastIndexOf -- ",
+		str.StringLastIndexOf("a"),
+	})
+	goscript.ColorPrint([]any{
+		"StringToMap -- ",
+		str.StringToMap(),
+	})
+	goscript.ColorPrint([]any{
+		"StringToSlice -- ",
+		str.StringToSlice(),
+	})
+	goscript.ColorPrint([]any{
+		"StringSplitWithChar -- ",
+		str.StringSplitWithChar("a"),
+	})
+	goscript.ColorPrint([]any{
+		"StringChunks -- ",
+		str.StringChunks(3),
+	})
+	goscript.ColorPrint([]any{
+		"StringRemoveFirstChar -- ",
+		str.StringRemoveFirstChar(),
+	})
+	goscript.ColorPrint([]any{
+		"StringRemoveLastChar -- ",
+		str.StringRemoveLastChar(),
+	})
+	// str = "fumehd"
+	// goscript.ColorPrint([]any{
+	// 	"StringSplit -- ",
+	// 	str.StringSplit("fum"),
+	// })
+	// fmt.Println("StringSplit -- ", goscript.StringSplit(string(str), "shum"))
 }
