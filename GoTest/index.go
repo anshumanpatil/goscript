@@ -52,10 +52,10 @@ func main() {
 		"StringRemoveLastChar -- ",
 		str.StringRemoveLastChar(),
 	})
-	// str = "fumehd"
-	// goscript.ColorPrint([]any{
-	// 	"StringSplit -- ",
-	// 	str.StringSplit("fum"),
-	// })
+	str = "anshuman-is-very-good-boy-to-answer"
+	goscript.ColorPrint([]any{
+		"StringSplit -- ",
+		str.StringSplit("ans"),
+	})
 	// fmt.Println("StringSplit -- ", goscript.StringSplit(string(str), "shum"))
 }

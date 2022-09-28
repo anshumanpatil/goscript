@@ -154,53 +154,54 @@ func (str JSString) StringContains(occurer string) (result int) {
 	return
 }
 
-// func (str JSString) StringSplit(occurer JSString) (myresult []JSString) {
-// 	strCopy := str
-// 	isAvailableAt := -1
-// 	freshValues := []string{}
-// 	resultStart := ""
-// 	resultEnd := ""
-// 	result := ""
-// 	for {
-// 		myresult = str.StringChunks(len(occurer))
-// 		for i, v := range myresult {
-// 			if v == occurer {
-// 				isAvailableAt = i
+func (str JSString) StringSplit(occurer JSString) (myresult []JSString) {
+	strCopy := str
+	isAvailableAt := -1
+	freshValues := []string{}
+	resultStart := ""
+	resultEnd := ""
+	result := ""
+	for {
+		myresult = str.StringChunks(len(occurer))
+		for i, v := range myresult {
+			if v == occurer {
+				isAvailableAt = i
 
-// 				break
-// 			}
-// 		}
-// 		if isAvailableAt >= 0 || len(str) == 0 {
-// 			break
-// 		}
-// 		freshValues = append(freshValues, (str.StringToSlice())[0])
-// 		str = JSString(str.StringRemoveFirstChar())
-// 	}
-// 	if isAvailableAt == -1 { // occurer not available in string
-// 		fmt.Println("isAvailableAt", isAvailableAt, str)
-// 		myresult = []JSString{strCopy}
-// 		return myresult
-// 	}
-// 	for _, v := range myresult[0:isAvailableAt] {
-// 		resultStart += string(v)
-// 	}
-// 	for _, v := range myresult[isAvailableAt+len(occurer):] {
-// 		resultEnd += string(v)
-// 	}
-// 	for _, v := range freshValues {
-// 		result += string(v)
-// 	}
-// 	myresult = []JSString{}
-// 	myresult = append(myresult, JSString(string(result)+string(resultStart)), JSString(resultEnd))
-// 	fmt.Println(" result : ", result)
-// 	fmt.Println(" resultStart : ", resultStart)
-// 	fmt.Println(" resultEnd : ", resultEnd)
-// 	fmt.Println(" freshValues : ", freshValues)
-// 	fmt.Println(" isAvailableAt : ", isAvailableAt)
-// 	fmt.Println(" strCopy : ", strCopy)
-// 	fmt.Println(" occurer : ", occurer)
-// 	return
-// }
+				break
+			}
+		}
+		if isAvailableAt >= 0 || len(str) == 0 {
+			break
+		}
+		freshValues = append(freshValues, (str.StringToSlice())[0])
+		str = JSString(str.StringRemoveFirstChar())
+	}
+	if isAvailableAt == -1 { // occurer not available in string
+		fmt.Println("isAvailableAt", isAvailableAt, str)
+		myresult = []JSString{strCopy}
+		return myresult
+	}
+	for _, v := range myresult[0:isAvailableAt] {
+		resultStart += string(v)
+	}
+	fmt.Println(myresult, isAvailableAt)
+	for _, v := range myresult[isAvailableAt+1:] {
+		resultEnd += string(v)
+	}
+	for _, v := range freshValues {
+		result += string(v)
+	}
+	myresult = []JSString{}
+	myresult = append(myresult, JSString(string(result)+string(resultStart)), JSString(resultEnd))
+	fmt.Println(" result : ", result)
+	fmt.Println(" resultStart : ", resultStart)
+	fmt.Println(" resultEnd : ", resultEnd)
+	fmt.Println(" freshValues : ", freshValues)
+	fmt.Println(" isAvailableAt : ", isAvailableAt)
+	fmt.Println(" strCopy : ", strCopy)
+	fmt.Println(" occurer : ", occurer)
+	return
+}
 
 func (str JSString) StringSplitWithChar(splitter JSString) []string {
 	// str += splitter
