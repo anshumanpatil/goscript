@@ -1,61 +1,64 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/anshumanpatil/goscript"
 )
 
 func main() {
-	var str goscript.JSString
-	str = "anshuman"
-	is, res := str.IsPalindrome()
-	fmt.Println("IsPalindrome -- ", is, res)
-	goscript.ColorPrint([]any{"IsPalindrome -- ", is, res})
+
+	// var str goscript.JSString
+	str := goscript.JSString("anshuman is good man")
+	// is, res := str.IsPalindrome()
+	// goscript.ColorPrint([]any{"IsPalindrome -- ", is, res})
+
 	goscript.ColorPrint([]any{
-		"StringRemove -- ",
-		str.StringRemove("hu"),
+		"String Contains -- ",
+		str,
+		"an :=== ",
+
+		str.Split("ans"),
 	})
-	goscript.ColorPrint([]any{
-		"StringContains -- ",
-		str.StringContains("ans"),
-	})
-	goscript.ColorPrint([]any{
-		"StringIndexOf -- ",
-		str.StringIndexOf("n"),
-	})
-	goscript.ColorPrint([]any{
-		"StringLastIndexOf -- ",
-		str.StringLastIndexOf("a"),
-	})
-	goscript.ColorPrint([]any{
-		"StringToMap -- ",
-		str.StringToMap(),
-	})
-	goscript.ColorPrint([]any{
-		"StringToSlice -- ",
-		str.StringToSlice(),
-	})
-	goscript.ColorPrint([]any{
-		"StringSplitWithChar -- ",
-		str.StringSplitWithChar("a"),
-	})
-	goscript.ColorPrint([]any{
-		"StringChunks -- ",
-		str.StringChunks(3),
-	})
-	goscript.ColorPrint([]any{
-		"StringRemoveFirstChar -- ",
-		str.StringRemoveFirstChar(),
-	})
-	goscript.ColorPrint([]any{
-		"StringRemoveLastChar -- ",
-		str.StringRemoveLastChar(),
-	})
-	str = "anshuman-is-very-good-boy-to-answer"
-	goscript.ColorPrint([]any{
-		"StringSplit -- ",
-		str.StringSplit("ans"),
-	})
+	// goscript.ColorPrint([]any{
+	// 	"String IndexOf -- ",
+	// 	str.IndexOf("a"),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String LastIndexOf -- ",
+	// 	str.LastIndexOf("a"),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String ToMap -- ",
+	// 	str.ToMap(),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String ToSlice -- ",
+	// 	str.ToSlice(),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String SplitWithChar -- ",
+	// 	str.SplitWithChar("a"),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String Chunks -- ",
+	// 	str.Chunks(3),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String RemoveFirstChar -- ",
+	// 	str.RemoveFirstChar(),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"String RemoveLastChar -- ",
+	// 	str.RemoveLastChar(),
+	// })
+	// str = "anshuman-is-very-good-booy-to-answer"
+	// goscript.ColorPrint([]any{
+	// 	"String Split -- ",
+	// 	str.Split("ans"),
+	// })
+	// goscript.ColorPrint([]any{
+	// 	"Dummy -- ",
+	// 	str.Dummy("oo"),
+	// })
+
 	// fmt.Println("StringSplit -- ", goscript.StringSplit(string(str), "shum"))
 }
