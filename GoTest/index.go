@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/anshumanpatil/goscript"
 )
 
@@ -11,13 +13,13 @@ func main() {
 	// is, res := str.IsPalindrome()
 	// goscript.ColorPrint([]any{"IsPalindrome -- ", is, res})
 
-	goscript.ColorPrint([]any{
-		"String Contains -- ",
-		str,
-		"an :=== ",
+	// goscript.ColorPrint([]any{
+	// 	"String Contains -- ",
+	// 	str,
+	// 	"an :=== ",
 
-		str.Split("ans"),
-	})
+	// 	str.Split("ans"),
+	// })
 	// goscript.ColorPrint([]any{
 	// 	"String IndexOf -- ",
 	// 	str.IndexOf("a"),
@@ -61,4 +63,11 @@ func main() {
 	// })
 
 	// fmt.Println("StringSplit -- ", goscript.StringSplit(string(str), "shum"))
+	fmt.Println(str)
+	arr := []int{1, 2, 3, 4, 5}
+	// str.ToSlice()
+	goscript.ARJS(arr).MapLikeJS(func(entry, idx int) {
+		fmt.Println(entry, idx)
+	})
+
 }
