@@ -93,7 +93,6 @@ func main() {
 	// time.Sleep(2 * time.Second)
 	// time.Sleep(2 * time.Second)
 	// time.Sleep(2 * time.Second)
-	fmt.Print("\033[H\033[2J")
 
 	// Replace Example
 	str = "anshuman is in pune and mumbai pune pune punpun"
@@ -105,6 +104,19 @@ func main() {
 	str = "anshuman is in pune and mumbai pune pune punpun"
 	goscript.ColorPrint("\nSplit Example : ")
 	goscript.ColorPrint("Split: ", str, str.Split("pun"))
+	goscript.ColorPrint("-----------------------------------------------------------\n")
+
+	fmt.Print("\033[H\033[2J")
+
+	// ForEach Example
+	str = "anshuman"
+	goscript.ColorPrint("\nForEach Example : ")
+	// goscript.ColorPrint("ForEach: ", str, )
+
+	bing := str.ForEach(func(e uint8, i interface{}) goscript.JSString {
+		return goscript.JSString("-" + string(e))
+	})
+	fmt.Println(bing)
 	goscript.ColorPrint("-----------------------------------------------------------\n")
 
 	// Puma([]interface{}{1, 2, "anshuman"}).MAP(func(elem, idx interface{}) {

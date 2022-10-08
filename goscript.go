@@ -3,21 +3,26 @@ package goscript
 // https://medium.com/@BastianRob/implementing-reduce-in-go-4a3e6e3affc
 import (
 	"fmt"
+	"reflect"
 )
 
 type JSString string
 
 // type ARJS []interface{}
 
-// func (source ARJS) MapLikeJS(reducer interface{}) {
-// 	rv := reflect.ValueOf(reducer)
-// 	for i := 0; i < len(source); i++ {
-// 		rv.Call([]reflect.Value{
-// 			reflect.ValueOf(source[i]),
-// 			reflect.ValueOf(i),
-// 		})
-// 	}
-// }
+func (source JSString) ForEach(calle func(uint8, interface{}) JSString) (result []JSString) {
+	calleFunc := reflect.ValueOf(calle)
+
+	for i := 0; i < len(source); i++ {
+		print := calleFunc.Call([]reflect.Value{
+			reflect.ValueOf(source[i]),
+			reflect.ValueOf(i),
+		})
+		result = append(result, JSString(fmt.Sprint(print[0])))
+	}
+
+	return
+}
 
 func anyTrue(src []int, occurer int) (result bool) {
 	for _, idx := range src {
@@ -270,72 +275,4 @@ func (str JSString) Chunks(splitter int) []JSString {
 // 		result += recs * ver
 // 	}
 // 	return
-// }
-
-// func (str JSString) Split(occurer JSString) (myresult []JSString) {
-// 	strCopy := str
-// 	isAvailableAt := -1
-// 	freshValues := []JSString{}
-// 	resultStart := ""
-// 	resultEnd := ""
-// 	result := ""
-// 	for {
-// 		myresult = str.Chunks(len(occurer))
-// 		for i, v := range myresult {
-// 			if v == occurer {
-// 				isAvailableAt = i
-
-// 				break
-// 			}
-// 		}
-// 		if isAvailableAt >= 0 || len(str) == 0 {
-// 			break
-// 		}
-// 		freshValues = append(freshValues, (str.ToSlice())[0])
-// 		str = JSString(str.RemoveFirstChar())
-// 	}
-// 	if isAvailableAt == -1 { // occurer not available in string
-// 		fmt.Println("isAvailableAt", isAvailableAt, str)
-// 		myresult = []JSString{strCopy}
-// 		return myresult
-// 	}
-// 	for _, v := range myresult[0:isAvailableAt] {
-// 		resultStart += string(v)
-// 	}
-// 	fmt.Println(myresult, isAvailableAt)
-// 	for _, v := range myresult[isAvailableAt+1:] {
-// 		resultEnd += string(v)
-// 	}
-// 	for _, v := range freshValues {
-// 		result += string(v)
-// 	}
-// 	myresult = []JSString{}
-// 	myresult = append(myresult, JSString(string(result)+string(resultStart)), JSString(resultEnd))
-// 	fmt.Println(" result : ", result)
-// 	fmt.Println(" resultStart : ", resultStart)
-// 	fmt.Println(" resultEnd : ", resultEnd)
-// 	fmt.Println(" freshValues : ", freshValues)
-// 	fmt.Println(" isAvailableAt : ", isAvailableAt)
-// 	fmt.Println(" strCopy : ", strCopy)
-// 	fmt.Println(" occurer : ", occurer)
-// 	return
-// }
-
-// func (str JSString) SplitWithChar(splitter JSString) []string {
-// 	// str += splitter
-// 	strArr := []rune(string(str))
-// 	myresult := []string{}
-// 	p := ""
-// 	for i := 0; i <= len(strArr)-1; i++ {
-// 		// fmt.Println("index - ", i, " string - ", string(strArr[i]), " p -- ", p, " comparison ", string(strArr[i]) == splitter)
-// 		if JSString(strArr[i]) == splitter {
-// 			myresult = append(myresult, p)
-// 			p = ""
-// 		} else {
-// 			p += string(strArr[i])
-// 		}
-// 	}
-// 	myresult = append(myresult, p)
-
-// 	return myresult
 // }
