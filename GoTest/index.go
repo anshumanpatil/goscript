@@ -6,18 +6,6 @@ import (
 	"github.com/anshumanpatil/goscript"
 )
 
-// type Puma []interface{}
-
-// func (p Puma) MAP(f interface{}) {
-// 	ft := reflect.ValueOf(f)
-// 	for i := 0; i < len(p); i++ {
-// 		ft.Call([]reflect.Value{
-// 			reflect.ValueOf(p[i]),
-// 			reflect.ValueOf(i),
-// 		})
-// 	}
-// }
-
 func main() {
 
 	var str goscript.JSString
@@ -106,7 +94,7 @@ func main() {
 	goscript.ColorPrint("Split: ", str, str.Split("pun"))
 	goscript.ColorPrint("-----------------------------------------------------------\n")
 
-	fmt.Print("\033[H\033[2J")
+	goscript.ColorPrinter(0).Clear()
 
 	// ForEach Example
 	str = "anshuman"
@@ -119,6 +107,13 @@ func main() {
 	fmt.Println(bing)
 	goscript.ColorPrint("-----------------------------------------------------------\n")
 
+	goscript.ColorPrinter(0).
+		Red("Red Print").
+		BGRed().
+		White("BG Dark Gray").
+		Blinking().
+		Red("anshu").
+		Green(bing, "Green\n")
 	// Puma([]interface{}{1, 2, "anshuman"}).MAP(func(elem, idx interface{}) {
 	// 	fmt.Println(elem, idx)
 	// })

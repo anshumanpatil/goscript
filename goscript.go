@@ -1,14 +1,11 @@
 package goscript
 
-// https://medium.com/@BastianRob/implementing-reduce-in-go-4a3e6e3affc
 import (
 	"fmt"
 	"reflect"
 )
 
 type JSString string
-
-// type ARJS []interface{}
 
 func (source JSString) ForEach(calle func(uint8, interface{}) JSString) (result []JSString) {
 	calleFunc := reflect.ValueOf(calle)
